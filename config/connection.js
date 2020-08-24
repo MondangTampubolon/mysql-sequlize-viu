@@ -3,9 +3,9 @@ const Sequelize = require('sequelize')
 const db = new Sequelize({
     host: 'localhost',
     dialect: 'mysql',
-    database: 'impactbyte3',
+    database: 'viu',
     username:'root',
-    password:'password'
+    password:'rootroot'
 })
 
 module.exports = db

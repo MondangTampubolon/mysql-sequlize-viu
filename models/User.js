@@ -1,5 +1,7 @@
 const db = require('../config/connection')
 const Sequelize = require('sequelize');
+const Subscription = require('./subscription');
+
 
 const User = db.define('user', {
     userId: {
@@ -8,16 +10,42 @@ const User = db.define('user', {
         primaryKey: true,
         autoIncrement: true
     },
-    firstName: {
+    fullName: {
         type: Sequelize.STRING,
         allowNull: false
     },
-    lastName: {
+    userName: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    email: {
+        type: Sequelize.STRING,
+        validate: {
+            isEmail: true
+        }
+    },
+    password: {
+        type: Sequelize.STRING(64),
+        validate: {
+            is: ["^[0-9a-z]+$",'i'],
+        }
+    },
+    address: {
         type: Sequelize.STRING,
         allowNull: false
     }
 }, {
     // options
+
 });
+User.hasOne(Subscription, {
+    foreignKey: 'userId'
+});
+Subscription.belongsTo(User, {
+    foreignKey: 'userId',
+    constraints: false
+});
+
+
 
 module.exports = User;

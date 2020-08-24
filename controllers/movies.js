@@ -1,9 +1,9 @@
-const User = require('../models/User')
+const Movies = require('../models/movies')
 
 module.exports = {
     // fungsi CRUD
     getAll: (req, res) => {
-        User.findAll({
+        Movies.findAll({
             raw: true
         })
         .then(result => {
@@ -21,11 +21,11 @@ module.exports = {
             })
         })
     },
-    createUser: (req, res) => {
-        User.create(req.body)
+    createMovie: (req, res) => {
+        Movies.create(req.body)
         .then(result => {
             res.send({
-                message: "Create One user success",
+                message: "Create One movie success",
                 status: 201,
                 result
             })
@@ -38,15 +38,15 @@ module.exports = {
             })
         })
     },
-        updateProfile: async (req, res) => {
-        await User.update(req.body,{
+    updateMovie: async (req, res) => {
+        await Movies.update(req.body,{
             where:{
-                id_user: req.params.id
+                id_movie: req.params.id
             }
         })
         .then(result => {
             res.send({
-                message: "update one profile success",
+                message: "update one movie success",
                 status: 201,
                 result
             })
@@ -60,10 +60,10 @@ module.exports = {
             })
         })
     },
-    deleteUser: async (req, res) => {
-        await User. destroy({
+    deleteMovie: async (req, res) => {
+        await Movies. destroy({
             where: {
-                id_user: req.params.id
+                id_movie: req.params.id
             }
         })
         .then(result => {
@@ -73,7 +73,7 @@ module.exports = {
                 result
             })
         })
-        .catch(error => {
+        .catch (error => {
             console.log(error)
             res.send({
                 message: 'internal Server error',

@@ -1,9 +1,9 @@
-const User = require('../models/User')
+const HistoryWatch = require('../models/history_watch')
 
 module.exports = {
     // fungsi CRUD
     getAll: (req, res) => {
-        User.findAll({
+        HistoryWatch.findAll({
             raw: true
         })
         .then(result => {
@@ -21,11 +21,11 @@ module.exports = {
             })
         })
     },
-    createUser: (req, res) => {
-        User.create(req.body)
+    createHistoryWatch: (req, res) => {
+        HistoryWatch.create(req.body)
         .then(result => {
             res.send({
-                message: "Create One user success",
+                message: "Create One history success",
                 status: 201,
                 result
             })
@@ -38,32 +38,10 @@ module.exports = {
             })
         })
     },
-        updateProfile: async (req, res) => {
-        await User.update(req.body,{
-            where:{
-                id_user: req.params.id
-            }
-        })
-        .then(result => {
-            res.send({
-                message: "update one profile success",
-                status: 201,
-                result
-            })
-        })
-        .catch(error => {
-            console.log(error)
-            res.send({
-                message: "Internal server error",
-                status: 500,
-                result
-            })
-        })
-    },
-    deleteUser: async (req, res) => {
-        await User. destroy({
+    deleteHistoryWatch: async (req, res) => {
+        await HistoryWatch. destroy({
             where: {
-                id_user: req.params.id
+                id_history: req.params.id
             }
         })
         .then(result => {
